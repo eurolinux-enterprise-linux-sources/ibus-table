@@ -1,6 +1,6 @@
 Name:       ibus-table
 Version:    1.2.0.20100111
-Release:    4%{?dist}
+Release:    5%{?dist}
 Summary:    Table engine for IBus
 License:    LGPLv2+
 Group:      System Environment/Libraries
@@ -49,6 +49,8 @@ Headers and other files needed to develop applications using the %{name}
 %install
 %__rm -rf $RPM_BUILD_ROOT
 %__make DESTDIR=${RPM_BUILD_ROOT} NO_INDEX=true install pkgconfigdir=%{_datadir}/pkgconfig
+%{__python} ${RPM_BUILD_ROOT}/%{_datadir}/ibus-table/engine/tabcreatedb.py -i -n ${RPM_BUILD_ROOT}/%{_datadir}/ibus-table/tables/compose.db
+%{__python} ${RPM_BUILD_ROOT}/%{_datadir}/ibus-table/engine/tabcreatedb.py -i -n ${RPM_BUILD_ROOT}/%{_datadir}/ibus-table/tables/latex.db
 
 %find_lang %{name}
 
@@ -59,9 +61,6 @@ Headers and other files needed to develop applications using the %{name}
 
 %postun -p /sbin/ldconfig
 
-%post additional
-ibus-table-createdb -i -n %{_datadir}/ibus-table/tables/compose.db
-ibus-table-createdb -i -n %{_datadir}/ibus-table/tables/latex.db
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
@@ -125,6 +124,10 @@ ibus-table-createdb -i -n %{_datadir}/ibus-table/tables/latex.db
 %{_datadir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Jan 23 2014 Mike FABIAN <mfabian@redhat.com> - 1.2.0.20100111-5
+- Create indexes at installation, not in post install
+- Resolves: rhbz#983497
+
 * Thu Feb 04 2010 Caius 'kaio' Chance <cchance at redhat.com> - 1.2.0.20100111-4
 - Resolves: rhbz#559799.
 - Shorten description under 80 characters.
