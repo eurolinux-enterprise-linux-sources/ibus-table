@@ -1,0 +1,26 @@
+From 783d52a211b0e12f0c830e8c96a49682647faaf1 Mon Sep 17 00:00:00 2001
+From: Mike FABIAN <mfabian@redhat.com>
+Date: Wed, 22 Jan 2014 12:11:18 +0100
+Subject: [PATCH 1/2] Fix typo in ibus-table-createdb man-page
+
+"for for" -> "for"
+---
+ engine/ibus-table-createdb.sgml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/engine/ibus-table-createdb.sgml b/engine/ibus-table-createdb.sgml
+index 86c8336..6a1e439 100644
+--- a/engine/ibus-table-createdb.sgml
++++ b/engine/ibus-table-createdb.sgml
+@@ -142,7 +142,7 @@ manpage.1: manpage.sgml
+           <option>--no-create-index</option>
+         </term>
+         <listitem>
+-          <para>Do not create an index for for a database (Only for distribution purposes, a normal user should not use this flag!)</para>
++          <para>Do not create an index for a database (Only for distribution purposes, a normal user should not use this flag!)</para>
+         </listitem>
+       </varlistentry>
+       <varlistentry>
+-- 
+1.8.4.2
+

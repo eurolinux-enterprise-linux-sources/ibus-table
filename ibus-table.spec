@@ -1,6 +1,6 @@
 Name:       ibus-table
 Version:    1.5.0
-Release:    2%{?dist}
+Release:    5%{?dist}
 Summary:    The Table engine for IBus platform
 License:    LGPLv2+
 Group:      System Environment/Libraries
@@ -17,6 +17,11 @@ Patch8:     0002-Add-auto_select-functionality-to-select-the-first-ph.patch
 Patch9:     0003-Update-cmode-pproperty-in-chinese-mode-only.patch
 Patch10:    0004-Fall-back-to-auto_select-False-if-neither-dconf-nor-.patch
 Patch11:    0005-Preedit-needs-to-be-updated-on-page-up-and-page-down.patch
+Patch12:    0006-Add-man-page-for-ibus-table-createdb.patch
+Patch13:    0007-prebuilt-files-for-man-page-for-ibus-table-createdb.patch
+Patch14:    0001-Fix-typo-in-ibus-table-createdb-man-page.patch
+Patch15:    0002-When-tabcreatedb.py-is-called-without-any-options-pr.patch
+Patch16:    0008-prebuilt-files-for-man-page-for-ibus-table-createdb.patch
 
 Requires:       ibus > 1.3.0
 BuildRequires:  ibus-devel > 1.3.0
@@ -50,6 +55,11 @@ Development files for %{name}.
 %patch9 -p1 -b .update-cmode-in-chinese-mode-only
 %patch10 -p1 -b .fall-back-to-auto-select-false-by-default
 %patch11 -p1 -b .preedit-needs-to-be-updated-when-paging
+%patch12 -p1 -b .Add-man-page-for-ibus-table-createdb
+%patch13 -p1 -b .prebuilt-files-for-man-page-for-ibus-table-createdb
+%patch14 -p1 -b .Fix-typo-in-ibus-table-createdb-man-page
+%patch15 -p1 -b .When-tabcreatedb.py-is-called-without-any-options-pr
+%patch16 -p1 -b .prebuilt-files-for-man-page-for-ibus-table-createdb
 
 %build
 %configure --disable-static --disable-additional
@@ -117,12 +127,23 @@ Development files for %{name}.
 %{_datadir}/%{name}/tables/template.txt
 %{_bindir}/%{name}-createdb
 %{_libexecdir}/ibus-engine-table
+%{_mandir}/man1/*
 
 %files devel
 %defattr(-, root, root, -)
 %{_datadir}/pkgconfig/%{name}.pc
 
 %changelog
+* Fri Jan 24 2014 Mike FABIAN <mfabian@redhat.com> - 1.5.0-5
+- Resolves: rhbz#1049760 - [ALL LANG] Traceback produced when run ibus-table-createdb from terminal.
+- When tabcreatedb.py is called without any options, print a usage message. Do not just show a cryptic backtrace.
+
+* Tue Jan 14 2014 Mike FABIAN <mfabian@redhat.com> - 1.5.0-4
+- Resolves: rhbz#948454 - Man page scan results for ibus-table
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.5.0-3
+- Mass rebuild 2013-12-27
+
 * Thu Feb 14 2013 Mike FABIAN <mfabian@redhat.com> - 1.5.0-2
 - Resolves: #911487 - Non-Chinese tables from the ibus-table-other package do not work
 - Add auto_select functionality to select the first phrase when typing.
