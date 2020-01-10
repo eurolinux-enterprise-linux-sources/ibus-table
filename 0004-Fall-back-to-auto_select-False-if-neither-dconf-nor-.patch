@@ -1,0 +1,42 @@
+From 3d03bd8f8c558392db42897370cef65bdbad57bd Mon Sep 17 00:00:00 2001
+From: Mike FABIAN <mfabian@redhat.com>
+Date: Tue, 5 Feb 2013 09:11:17 +0100
+Subject: [PATCH 4/5] Fall back to auto_select = False if neither dconf nor
+ the table have a value for auto_select
+
+---
+ engine/table.py | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/engine/table.py b/engine/table.py
+index f0a8a61..3999c35 100644
+--- a/engine/table.py
++++ b/engine/table.py
+@@ -233,8 +233,10 @@ class editor(object):
+                 self._config_section,
+                 "AutoSelect"))
+         if self._auto_select == None:
+-            self._auto_select = self.db.get_ime_property('auto_select').lower() == u'true'
+-        
++            if self.db.get_ime_property('auto_select') != None:
++                self._auto_select = self.db.get_ime_property('auto_select').lower() == u'true'
++            else:
++                self._auto_select = False
+ 
+     def init_select_keys(self):
+         # __select_keys: lookup table select keys/labels
+@@ -1162,7 +1164,10 @@ class tabengine (IBus.Engine):
+                 self._config_section,
+                 "AutoSelect"))
+         if self._auto_select == None:
+-            self._auto_select = self.db.get_ime_property('auto_select').lower() == u'true'
++            if self.db.get_ime_property('auto_select') != None:
++                self._auto_select = self.db.get_ime_property('auto_select').lower() == u'true'
++            else:
++                self._auto_select = False
+         
+         # the commit phrases length
+         self._len_list = [0]
+-- 
+1.7.11.7
+

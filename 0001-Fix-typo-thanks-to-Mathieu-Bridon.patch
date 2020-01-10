@@ -1,0 +1,75 @@
+From 03cba776da99b05218c2b1c86f3e93d3373f253e Mon Sep 17 00:00:00 2001
+From: Mike FABIAN <mfabian@redhat.com>
+Date: Wed, 30 Jan 2013 07:41:54 +0100
+Subject: [PATCH 1/5] Fix typo, thanks to Mathieu Bridon
+
+---
+ engine/chinese_variants.py         | 4 ++--
+ tools/generate-chinese-variants.py | 8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/engine/chinese_variants.py b/engine/chinese_variants.py
+index e48d992..5dce934 100644
+--- a/engine/chinese_variants.py
++++ b/engine/chinese_variants.py
+@@ -27,7 +27,7 @@ variants_table = {
+     # 1 = 1 << 0       simplified Chinese
+     # 2 = 1 << 1       traditional Chinese
+     # 3 = (1 | 1 << 1) used both in simplified *and* traditional Chinese
+-    # 4 = 2 << 3       mixture of simplified and traditional Chinese
++    # 4 = 1 << 2       mixture of simplified and traditional Chinese
+     u'蘄': 2,
+     u'谈': 1,
+     u'預': 2,
+@@ -6075,7 +6075,7 @@ def detect_chinese_category(phrase):
+     1 = 1 << 0       simplified Chinese
+     2 = 1 << 1       traditional Chinese
+     3 = (1 | 1 << 1) used both in simplified *and* traditional Chinese
+-    4 = 2 << 3       mixture of simplified and traditional Chinese
++    4 = 1 << 2       mixture of simplified and traditional Chinese
+     '''
+     # make sure that we got a unicode string
+     if type(phrase) != type(u''):
+diff --git a/tools/generate-chinese-variants.py b/tools/generate-chinese-variants.py
+index b846496..c54eaec 100755
+--- a/tools/generate-chinese-variants.py
++++ b/tools/generate-chinese-variants.py
+@@ -58,7 +58,7 @@ variants_table_orig = {
+     # 1 = 1 << 0       simplified Chinese
+     # 2 = 1 << 1       traditional Chinese
+     # 3 = (1 | 1 << 1) used both in simplified *and* traditional Chinese
+-    # 4 = 2 << 3       mixture of simplified and traditional Chinese
++    # 4 = 1 << 2       mixture of simplified and traditional Chinese
+     #
+     # overrides can be added manually here. For example the following
+     # line marks the 〇 character as used in both
+@@ -185,7 +185,7 @@ variants_table = {
+     # 1 = 1 << 0       simplified Chinese
+     # 2 = 1 << 1       traditional Chinese
+     # 3 = (1 | 1 << 1) used both in simplified *and* traditional Chinese
+-    # 4 = 2 << 3       mixture of simplified and traditional Chinese
++    # 4 = 1 << 2       mixture of simplified and traditional Chinese
+ ''')
+ 
+     for phrase in variants_table_orig:
+@@ -208,7 +208,7 @@ def detect_chinese_category(phrase):
+     1 = 1 << 0       simplified Chinese
+     2 = 1 << 1       traditional Chinese
+     3 = (1 | 1 << 1) used both in simplified *and* traditional Chinese
+-    4 = 2 << 3       mixture of simplified and traditional Chinese
++    4 = 1 << 2       mixture of simplified and traditional Chinese
+     \'\'\'
+     # make sure that we got a unicode string
+     if type(phrase) != type(u''):
+@@ -253,7 +253,7 @@ test_data = {
+     # 1 = 1 << 0       simplified Chinese
+     # 2 = 1 << 1       traditional Chinese
+     # 3 = (1 | 1 << 1) used both in simplified *and* traditional Chinese
+-    # 4 = 2 << 3       mixture of simplified and traditional Chinese
++    # 4 = 1 << 2       mixture of simplified and traditional Chinese
+     u'乌': 1,
+     u'烏': 2,
+     u'晞': 3,
+-- 
+1.7.11.7
+

@@ -1,0 +1,66 @@
+From 3b7a3530c42766b801cded26b3bc269222c3fb0a Mon Sep 17 00:00:00 2001
+From: Mike FABIAN <mfabian@redhat.com>
+Date: Thu, 14 Feb 2013 18:21:57 +0100
+Subject: [PATCH 5/5] Preedit needs to be updated on page-up and page-down
+
+When paging through the lookup table, the preedit needs to be updated
+to show the phrase selected by the cursor in the lookup table. Before
+this patch, the preedit was not updated and when commiting the
+character selected in the lookup table suddenly replaced the character
+in the preedit. This differed from the behaviour when moving through
+the lookup table with the arrow-up and arrow-down keys.
+Using page-up and page-down or the arrow icons at the bottom
+of the lookup table should also update the preedit just like it
+is done when the arrow-up and arrow-down keys are used.
+---
+ engine/table.py | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/engine/table.py b/engine/table.py
+index 3999c35..58a8d4d 100644
+--- a/engine/table.py
++++ b/engine/table.py
+@@ -1751,7 +1751,7 @@ class tabengine (IBus.Engine):
+             #  on lookup page
+             if IBus.KEY_space in self._page_down_keys:
+                 res = self._editor.page_down()
+-                self._update_lookup_table ()
++                self._update_ui ()
+                 return res
+             else:
+                 o_py = self._editor._py_mode
+@@ -1826,13 +1826,13 @@ class tabengine (IBus.Engine):
+         elif key.code in self._page_down_keys \
+                 and self._editor._candidates[0]:
+             res = self._editor.page_down()
+-            self._update_lookup_table ()
++            self._update_ui ()
+             return res
+ 
+         elif key.code in self._page_up_keys \
+                 and self._editor._candidates[0]:
+             res = self._editor.page_up ()
+-            self._update_lookup_table ()
++            self._update_ui ()
+             return res
+ 
+         elif keychar in self._editor.get_select_keys() and self._editor._candidates[0]:
+@@ -1909,13 +1909,13 @@ class tabengine (IBus.Engine):
+ 
+     def do_page_up (self):
+         if self._editor.page_up ():
+-            self._update_lookup_table ()
++            self._update_ui ()
+             return True
+         return False
+ 
+     def do_page_down (self):
+         if self._editor.page_down ():
+-            self._update_lookup_table ()
++            self._update_ui ()
+             return True
+         return False
+ 
+-- 
+1.7.11.7
+

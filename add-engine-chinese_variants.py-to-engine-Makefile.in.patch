@@ -1,0 +1,12 @@
+diff -ru ibus-table-1.5.0/engine/Makefile.in ibus-table-1.5.0/engine/Makefile.in
+--- ibus-table-1.5.0/engine/Makefile.in	2013-01-28 15:43:30.000000000 +0100
++++ ibus-table-1.5.0/engine/Makefile.in	2013-01-28 17:10:33.749435024 +0100
+@@ -254,6 +254,7 @@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ engine_table_PYTHON = \
++	chinese_variants.py \
+ 	factory.py \
+ 	main.py \
+ 	table.py \
+

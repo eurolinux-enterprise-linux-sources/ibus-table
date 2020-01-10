@@ -1,0 +1,25 @@
+From 2baa9c3ff258c0623b4777f2c537467339cdcef6 Mon Sep 17 00:00:00 2001
+From: bnauwelaerts <bnauwelaerts@cli0189.fednot.be>
+Date: Sat, 2 Feb 2013 17:22:40 +0100
+Subject: [PATCH 3/5] Update cmode pproperty in chinese mode only
+
+---
+ engine/table.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/engine/table.py b/engine/table.py
+index 4a10636..f0a8a61 100644
+--- a/engine/table.py
++++ b/engine/table.py
+@@ -1304,7 +1304,7 @@ class tabengine (IBus.Engine):
+                 self._set_property(self._cmode_property, 'tcb-mode.svg', _('Traditional Chinese First Big Charset Mode'), _('Switch to Big Charset Mode'))
+             elif self._editor._chinese_mode == 4:
+                 self._set_property(self._cmode_property, 'cb-mode.svg', _('Big Chinese Mode'), _('Switch to Simplified Chinese Mode'))
+-        self.update_property(self._cmode_property)
++            self.update_property(self._cmode_property)
+ 
+     def _set_property (self, property, icon, label, tooltip):
+         property.set_icon ( u'%s%s' % (self._icon_dir, icon ) )
+-- 
+1.7.11.7
+

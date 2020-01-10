@@ -1,0 +1,31 @@
+From 5b434df882093a3def36585582c84950ce7e3b52 Mon Sep 17 00:00:00 2001
+From: Mike FABIAN <mfabian@redhat.com>
+Date: Mon, 28 Jan 2013 15:15:10 +0100
+Subject: [PATCH 3/3] add engine/chinese_variants.py to engine/Makefile.am
+
+Needed by
+
+commit f17e9b3aecea7b6646da689a466341936bce1ee3
+Author: Mike FABIAN <mfabian@redhat.com>
+Date:   Thu Jan 24 17:37:27 2013 +0100
+
+    Improve detection of simplified and traditional Chinese
+---
+ engine/Makefile.am | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/engine/Makefile.am b/engine/Makefile.am
+index 082e177..f17afe3 100644
+--- a/engine/Makefile.am
++++ b/engine/Makefile.am
+@@ -20,6 +20,7 @@
+ #
+ 
+ engine_table_PYTHON = \
++	chinese_variants.py \
+ 	factory.py \
+ 	main.py \
+ 	table.py \
+-- 
+1.7.11.7
+
